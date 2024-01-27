@@ -10,12 +10,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
         KC_MPLY , KC_NO   , KC_MUTE ,
         KC_NO   , KC_NO   , KC_NO   ,
-        KC_NO   , KC_NO   , KC_NO   ,
+        KC_NO   , KC_NO   , KC_NO
     )
 };
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    else if (index == _MIDDLE) {
+    if (index == _MIDDLE) {
         if (clockwise) {
             tap_code(KC_NO);
         } else {
@@ -24,9 +24,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     else if (index == _RIGHT) {
         if (clockwise) {
-            tap_code(KC_VOLD);
-        } else {
             tap_code(KC_VOLU);
+        } else {
+            tap_code(KC_VOLD);
         }
     }
     return false;
