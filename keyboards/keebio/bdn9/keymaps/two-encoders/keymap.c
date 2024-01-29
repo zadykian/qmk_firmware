@@ -20,7 +20,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
         TD(MEDIA_CONTROL) , KC_MUTE       , KC_NO         ,
         TD(F14_MACRO)     , TD(F15_MACRO) , TD(F16_MACRO) ,
-        TD(F17_MACRO)     , TD(F18_MACRO) , TD(F19_MACRO) ,
+        TD(F17_MACRO)     , TD(F18_MACRO) , TD(F19_MACRO)
     )
 };
 
