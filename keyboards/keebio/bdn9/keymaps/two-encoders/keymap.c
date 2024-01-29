@@ -104,16 +104,16 @@ void tap_dance_on_reset(tap_dance_state_t *state, void *user_data) {
         .user_data = (void *)&((tap_dance_action_codes_t){ st, sh, dt, dh, tt, th }), \
     }
 
+#define TAP_DANCING_FN(key) TAP_DANCING( A(key) , G(A(key)) , C(key) , G(C(key)) , S(key) , G(S(key)) )
+
 tap_dance_action_t tap_dance_actions[] = {
-    // Key    \   Action   |    1x Tap    |   1x Hold    |    2x Tap    |   2x Hold    |    3x Tap    |   3x Hold    |
+    [KEY_ANY] = TAP_DANCING(KC_MPLY, KC_NO, KC_MNXT, KC_NO, KC_MPRV, KC_NO),
 
-    [KEY_ANY] = TAP_DANCING(   KC_MPLY    ,    KC_NO     ,   KC_MNXT    ,    KC_NO     ,   KC_MPRV    ,    KC_NO     ),
+    [KEY_F04] = TAP_DANCING_FN(KC_F14),
+    [KEY_F05] = TAP_DANCING_FN(KC_F15),
+    [KEY_F06] = TAP_DANCING_FN(KC_F16),
 
-    [KEY_F04] = TAP_DANCING(  A(KC_F14)   ,  C(KC_F14)   ,  S(KC_F14)   , A(C(KC_F14)) , A(S(KC_F14)) , C(S(KC_F14)) ),
-    [KEY_F05] = TAP_DANCING(  A(KC_F15)   ,  C(KC_F15)   ,  S(KC_F15)   , A(C(KC_F15)) , A(S(KC_F15)) , C(S(KC_F15)) ),
-    [KEY_F06] = TAP_DANCING(  A(KC_F16)   ,  C(KC_F16)   ,  S(KC_F16)   , A(C(KC_F16)) , A(S(KC_F16)) , C(S(KC_F16)) ),
-
-    [KEY_F07] = TAP_DANCING(  A(KC_F17)   ,  C(KC_F17)   ,  S(KC_F17)   , A(C(KC_F17)) , A(S(KC_F17)) , C(S(KC_F17)) ),
-    [KEY_F08] = TAP_DANCING(  A(KC_F18)   ,  C(KC_F18)   ,  S(KC_F18)   , A(C(KC_F18)) , A(S(KC_F18)) , C(S(KC_F18)) ),
-    [KEY_F09] = TAP_DANCING(  A(KC_F19)   ,  C(KC_F19)   ,  S(KC_F19)   , A(C(KC_F19)) , A(S(KC_F19)) , C(S(KC_F19)) ),
+    [KEY_F07] = TAP_DANCING_FN(KC_F17),
+    [KEY_F08] = TAP_DANCING_FN(KC_F18),
+    [KEY_F09] = TAP_DANCING_FN(KC_F19),
 };
