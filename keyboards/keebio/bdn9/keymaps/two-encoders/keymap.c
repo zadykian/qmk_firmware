@@ -105,7 +105,7 @@ void tap_dance_on_reset(tap_dance_state_t *state, void *user_data) {
     }
 
 #define TAP_DANCING_FN(key) \
-    TAP_DANCING( A(key) , G(A(key)) , C(key) , G(C(key)) , S(key) , G(S(key)) )
+    TAP_DANCING( A(key) , S(A(key)) , C(key) , S(C(key)) , S(key) , A(C(S(key))) )
 
 tap_dance_action_t tap_dance_actions[] = {
     [KEY_F13] = TAP_DANCING_FN(KC_F13),
