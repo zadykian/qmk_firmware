@@ -6,13 +6,13 @@ enum encoder_name {
 };
 
 enum key_name {
-    KEY_ANY,
-    KEY_F04,
-    KEY_F05,
-    KEY_F06,
-    KEY_F07,
-    KEY_F08,
-    KEY_F09,
+    KEY_F13,
+    KEY_F14,
+    KEY_F15,
+    KEY_F16,
+    KEY_F17,
+    KEY_F18,
+    KEY_F19,
 };
 
 enum tap_dance_action_name {
@@ -36,27 +36,27 @@ typedef struct {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        TD(KEY_ANY) , KC_MUTE     , C(KC_F13)   ,
-        TD(KEY_F04) , TD(KEY_F05) , TD(KEY_F06) ,
-        TD(KEY_F07) , TD(KEY_F08) , TD(KEY_F09)
+        TD(KEY_F13) , C(KC_F20)   , C(KC_F21)   ,
+        TD(KEY_F14) , TD(KEY_F15) , TD(KEY_F16) ,
+        TD(KEY_F17) , TD(KEY_F18) , TD(KEY_F19)
     )
 };
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == ENCODER_MIDDLE) {
         if (clockwise) {
-            tap_code(KC_VOLU);
+            tap_code16(S(KC_F20));
         }
         else {
-            tap_code(KC_VOLD);
+            tap_code16(A(KC_F20));
         }
     }
     else if (index == ENCODER_RIGHT) {
         if (clockwise) {
-            tap_code16(S(KC_F13));
+            tap_code16(S(KC_F21));
         }
         else {
-            tap_code16(A(KC_F13));
+            tap_code16(A(KC_F21));
         }
     }
     return false;
@@ -104,16 +104,15 @@ void tap_dance_on_reset(tap_dance_state_t *state, void *user_data) {
         .user_data = (void *)&((tap_dance_action_codes_t){ st, sh, dt, dh, tt, th }), \
     }
 
-#define TAP_DANCING_FN(key) TAP_DANCING( A(key) , G(A(key)) , C(key) , G(C(key)) , S(key) , G(S(key)) )
+#define TAP_DANCING_FN(key) \
+    TAP_DANCING( A(key) , G(A(key)) , C(key) , G(C(key)) , S(key) , G(S(key)) )
 
 tap_dance_action_t tap_dance_actions[] = {
-    [KEY_ANY] = TAP_DANCING(KC_MPLY, KC_NO, KC_MNXT, KC_NO, KC_MPRV, KC_NO),
-
-    [KEY_F04] = TAP_DANCING_FN(KC_F14),
-    [KEY_F05] = TAP_DANCING_FN(KC_F15),
-    [KEY_F06] = TAP_DANCING_FN(KC_F16),
-
-    [KEY_F07] = TAP_DANCING_FN(KC_F17),
-    [KEY_F08] = TAP_DANCING_FN(KC_F18),
-    [KEY_F09] = TAP_DANCING_FN(KC_F19),
+    [KEY_F13] = TAP_DANCING_FN(KC_F13),
+    [KEY_F14] = TAP_DANCING_FN(KC_F14),
+    [KEY_F15] = TAP_DANCING_FN(KC_F15),
+    [KEY_F16] = TAP_DANCING_FN(KC_F16),
+    [KEY_F17] = TAP_DANCING_FN(KC_F17),
+    [KEY_F18] = TAP_DANCING_FN(KC_F18),
+    [KEY_F19] = TAP_DANCING_FN(KC_F19),
 };
