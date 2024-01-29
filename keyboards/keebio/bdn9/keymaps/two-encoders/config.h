@@ -7,4 +7,4 @@
 #define RGBLIGHT_DEFAULT_ON false
 #define BACKLIGHT_DEFAULT_ON false
 
-#define TAPPING_TERM 500
+#define TAPPING_TERM 250
