@@ -75,32 +75,19 @@ enum tap_dance_action_name get_action_type(tap_dance_state_t *state) {
 void tap_dance_on_finished(tap_dance_state_t *state, void *user_data) {
     tap_dance_action_codes_t *action_codes = (tap_dance_action_codes_t *)user_data;
     switch (get_action_type(state)) {
-        case ACTION_SINGLE_TAP  : register_code16(action_codes->on_single_tap)  ; break;
-        case ACTION_SINGLE_HOLD : register_code16(action_codes->on_single_hold) ; break;
-        case ACTION_DOUBLE_TAP  : register_code16(action_codes->on_double_tap)  ; break;
-        case ACTION_DOUBLE_HOLD : register_code16(action_codes->on_double_hold) ; break;
-        case ACTION_TRIPLE_TAP  : register_code16(action_codes->on_triple_tap)  ; break;
-        case ACTION_TRIPLE_HOLD : register_code16(action_codes->on_triple_hold) ; break;
-        default: break;
-    }
-}
-
-void tap_dance_on_reset(tap_dance_state_t *state, void *user_data) {
-    tap_dance_action_codes_t *action_codes = (tap_dance_action_codes_t *)user_data;
-    switch (get_action_type(state)) {
-        case ACTION_SINGLE_TAP  : unregister_code16(action_codes->on_single_tap)  ; break;
-        case ACTION_SINGLE_HOLD : unregister_code16(action_codes->on_single_hold) ; break;
-        case ACTION_DOUBLE_TAP  : unregister_code16(action_codes->on_double_tap)  ; break;
-        case ACTION_DOUBLE_HOLD : unregister_code16(action_codes->on_double_hold) ; break;
-        case ACTION_TRIPLE_TAP  : unregister_code16(action_codes->on_triple_tap)  ; break;
-        case ACTION_TRIPLE_HOLD : unregister_code16(action_codes->on_triple_hold) ; break;
+        case ACTION_SINGLE_TAP  : tap_code16(action_codes->on_single_tap)  ; break;
+        case ACTION_SINGLE_HOLD : tap_code16(action_codes->on_single_hold) ; break;
+        case ACTION_DOUBLE_TAP  : tap_code16(action_codes->on_double_tap)  ; break;
+        case ACTION_DOUBLE_HOLD : tap_code16(action_codes->on_double_hold) ; break;
+        case ACTION_TRIPLE_TAP  : tap_code16(action_codes->on_triple_tap)  ; break;
+        case ACTION_TRIPLE_HOLD : tap_code16(action_codes->on_triple_hold) ; break;
         default: break;
     }
 }
 
 #define TAP_DANCING(st, sh, dt, dh, tt, th) \
     { \
-        .fn = { NULL, tap_dance_on_finished, tap_dance_on_reset, NULL }, \
+        .fn = { NULL, tap_dance_on_finished, NULL, NULL }, \
         .user_data = (void *)&((tap_dance_action_codes_t){ st, sh, dt, dh, tt, th }), \
     }
 
