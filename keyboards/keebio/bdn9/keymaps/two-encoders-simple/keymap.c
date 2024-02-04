@@ -36,8 +36,8 @@ typedef struct {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        TD(KEY_ANY) , KC_MUTE     , KC_KP_ENTER ,
-        TD(KEY_F13) , TD(KEY_F14) , TD(KEY_F15) ,
+        TD(KEY_ANY) , KC_MUTE     , KC_KP_ASTERISK ,
+        TD(KEY_F13) , TD(KEY_F14) , TD(KEY_F15)    ,
         TD(KEY_F16) , TD(KEY_F17) , TD(KEY_F18)
     )
 };
