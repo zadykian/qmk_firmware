@@ -6,13 +6,13 @@ enum encoder_name {
 };
 
 enum key_name {
+    KEY_ANY,
     KEY_F13,
     KEY_F14,
     KEY_F15,
     KEY_F16,
     KEY_F17,
     KEY_F18,
-    KEY_F19,
 };
 
 enum tap_dance_action_name {
@@ -36,9 +36,9 @@ typedef struct {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        TD(KEY_F13) , KC_MUTE     , C(KC_F21)   ,
-        TD(KEY_F14) , TD(KEY_F15) , TD(KEY_F16) ,
-        TD(KEY_F17) , TD(KEY_F18) , TD(KEY_F19)
+        TD(KEY_ANY) , KC_MUTE     , KC_KP_ENTER ,
+        TD(KEY_F13) , TD(KEY_F14) , TD(KEY_F15) ,
+        TD(KEY_F16) , TD(KEY_F17) , TD(KEY_F18)
     )
 };
 
@@ -53,10 +53,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     else if (index == ENCODER_RIGHT) {
         if (clockwise) {
-            tap_code(KC_BRIU);
+            tap_code(KC_KP_PLUS);
         }
         else {
-            tap_code(KC_BRID);
+            tap_code(KC_KP_MINUS);
         }
     }
     return false;
@@ -91,15 +91,15 @@ void tap_dance_on_finished(tap_dance_state_t *state, void *user_data) {
         .user_data = (void *)&((tap_dance_action_codes_t){ st, sh, dt, dh, tt, th }), \
     }
 
-#define TAP_DANCING_DOUBLE(on_single_tap, on_double_tap) \
-    TAP_DANCING(on_single_tap, KC_NO, on_double_tap, KC_NO, KC_NO, KC_NO )
+#define TAP_DANCING_TAPS(on_single_tap, on_double_tap, on_triple_tap) \
+    TAP_DANCING(on_single_tap, KC_NO, on_double_tap, KC_NO, on_triple_tap, KC_NO )
 
 tap_dance_action_t tap_dance_actions[] = {
-    [KEY_F13] = TAP_DANCING(KC_MNXT, KC_NO, KC_MNXT, KC_NO, KC_MPRV, KC_NO),
-    [KEY_F14] = TAP_DANCING_DOUBLE(KC_F13, KC_F19),
-    [KEY_F15] = TAP_DANCING_DOUBLE(KC_F14, KC_F20),
-    [KEY_F16] = TAP_DANCING_DOUBLE(KC_F15, KC_F21),
-    [KEY_F17] = TAP_DANCING_DOUBLE(KC_F16, KC_F22),
-    [KEY_F18] = TAP_DANCING_DOUBLE(KC_F17, KC_F23),
-    [KEY_F19] = TAP_DANCING_DOUBLE(KC_F18, KC_F24),
+    [KEY_ANY] = TAP_DANCING_TAPS(KC_MPLY, KC_MNXT, KC_MPRV),
+    [KEY_F13] = TAP_DANCING_TAPS(KC_F13, KC_F19, KC_NO),
+    [KEY_F14] = TAP_DANCING_TAPS(KC_F14, KC_F20, KC_NO),
+    [KEY_F15] = TAP_DANCING_TAPS(KC_F15, KC_F21, KC_NO),
+    [KEY_F16] = TAP_DANCING_TAPS(KC_F16, KC_F22, KC_NO),
+    [KEY_F17] = TAP_DANCING_TAPS(KC_F17, KC_F23, KC_NO),
+    [KEY_F18] = TAP_DANCING_TAPS(KC_F18, KC_F24, KC_NO),
 };
